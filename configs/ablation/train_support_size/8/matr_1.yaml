@@ -1,0 +1,27 @@
+model:
+    name: 'HybridDifferenceCNNRULPredictor'
+    in_channels: 6
+    channels: 32
+    input_height: 100
+    input_width: 1000
+    epochs: 1000
+    train_batch_size: 32
+    test_batch_size: 1
+    train_support_size: 8
+    test_support_size: 32
+    gradient_accumulation_steps: 4
+    evaluate_freq: 100
+    checkpoint_freq: None
+train_test_split:
+    name: 'MATRPrimaryTestTrainTestSplitter'
+    cell_data_path: 'data/processed/MATR'
+feature:
+    name: 'MultifacetedCapacityMatrixRULFeatureExtractor'
+    smooth_features: False
+label:
+    name: 'RULLabelAnnotator'
+label_transformation:
+    name: 'SequentialDataTransformation'
+    transformations:
+        - name: 'LogScaleDataTransformation'
+        - name: 'ZScoreDataTransformation'
