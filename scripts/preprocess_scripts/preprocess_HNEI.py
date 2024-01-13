@@ -13,7 +13,6 @@ def preprocess(path):
         x.stem.split('_timeseries')[0]
         for x in path.glob('*HNEI*timeseries*'))
 
-    batteries = []
     for cell in tqdm(cells, desc='Processing HNEI cells', leave=False):
         timeseries_file = next(path.glob(f'*{cell}*timeseries*'))
         cycle_data_file = next(path.glob(f'*{cell}*cycle_data*'))
@@ -24,8 +23,7 @@ def preprocess(path):
         timeseries_df, _ = clean_cell(
             timeseries_df, cycle_data_df, shifts=18)
         # Capacity is stated here: (https://www.mdpi.com/1996-1073/11/5/1031)
-        batteries.append(organize_cell(timeseries_df, cell, 2.8))
-    return batteries
+        yield organize_cell(timeseries_df, cell, 2.8)
 
 
 def organize_cell(timeseries_df, name, C):

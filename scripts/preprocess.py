@@ -1,4 +1,5 @@
 import os
+import argparse
 import importlib
 
 from tqdm import tqdm
@@ -24,13 +25,18 @@ def import_function(path: Path or str) -> callable:
 
 
 if __name__ == '__main__':
+    parser = argparse.ArgumentParser('BatLiNet data preprocessing CLI tool.')
+    parser.add_argument('--input-path', dest='input_path', required=True)
+    parser.add_argument('--output-path', dest='output_path', required=True)
+
+    args = parser.parse_args()
+
     script_path = Path(__file__).parent / 'preprocess_scripts'
-    raw_data_path = Path(__file__).parent.parent / 'data/raw'
-    processed_data_path = Path(__file__).parent.parent / 'data/processed'
+    raw_data_path = Path(args.input_path)
+    processed_data_path = Path(args.output_path)
 
     pbar = tqdm([
         raw_data_path / 'SNL',
-        raw_data_path / 'OX',
         raw_data_path / 'UL_PUR',
         raw_data_path / 'HNEI',
         raw_data_path / 'MATR',
@@ -40,6 +46,9 @@ if __name__ == '__main__':
     ])
 
     for path in pbar:
+        if not path.exists():
+            continue
+
         dataset = path.stem
         store_dir = processed_data_path / dataset
 
@@ -53,12 +62,7 @@ if __name__ == '__main__':
         pbar.set_description(f'Processing dataset {dataset}')
 
         preprocess = import_function(script_path / f'preprocess_{dataset}.py')
-        cells = preprocess(path)
-
-        if cells is None:
-            continue
-
-        # Dump to disk, one file per cell
-        for cell in tqdm(cells, desc='Save the cells to disk', leave=False):
+        
+        for cell in preprocess(path):
             store_path = store_dir / f'{cell.cell_id}.pkl'
             cell.dump(store_path)

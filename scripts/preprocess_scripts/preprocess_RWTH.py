@@ -97,7 +97,6 @@ def preprocess(path):
 
     cells = [f'{i:03}' for i in range(2, 50)]
     pbar = tqdm(cells, leave=False)
-    batteries = []
     for cell in pbar:
         name = f'RWTH_{cell}'
         pbar.set_description(f'Processing csv files for cell {name}')
@@ -139,7 +138,7 @@ def preprocess(path):
         # approximately 1.85Ah each. Cycling between 20% to 80% SoC
         # makes its nominal capacity 1.85 * 0.6 = 1.11 Ah.
         # See https://publications.rwth-aachen.de/record/818642/files/Content_RWTH-2021-04545.pdf  # noqa
-        batteries.append(BatteryData(
+        yield BatteryData(
             cell_id=name,
             cycle_data=cycles,
             form_factor='cylindrical_18650',
@@ -169,9 +168,7 @@ def preprocess(path):
             min_voltage_limit_in_V=3.5,
             max_voltage_limit_in_V=3.9,
             max_current_limit_in_A=4
-        ))
+        )
 
     # Remove the extracted files
     shutil.rmtree(subdir)
-
-    return batteries

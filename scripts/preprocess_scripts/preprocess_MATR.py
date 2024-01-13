@@ -135,12 +135,11 @@ def clean_batches(data_batches):
             data_batches[0][bk]['cycles'][str(last_cycle + j)] = \
                 data_batches[1][batch2_keys[i]]['cycles'][jk]
 
-    cleaned = [
-        organize_cell(batch[cell], cell)
-        for batch in data_batches for cell in batch
-        if cell not in batch2_keys
-    ]
-    return cleaned
+    for batch in data_batches:
+        for cell in batch:
+            if cell in batch2_keys:
+                continue
+            yield organize_cell(batch[cell], cell)
 
 
 def organize_cell(data, name):

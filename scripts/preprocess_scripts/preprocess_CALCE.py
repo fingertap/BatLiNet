@@ -98,7 +98,6 @@ def preprocess(path):
     path = Path(path)
     cells = [x.stem for x in path.glob('*.zip')]
     pbar = tqdm(cells, leave=False)
-    batteries = []
     for cell in pbar:
         rawdatadir = path / cell
         if not rawdatadir.exists():
@@ -162,7 +161,7 @@ def preprocess(path):
         if 'CX2_16' == cell.upper():
             clean_cycles = clean_cycles[1:]
 
-        batteries.append(BatteryData(
+        yield BatteryData(
             cell_id=f'CALCE_{cell}',
             form_factor='prismatic',
             anode_material='graphite',
@@ -171,9 +170,7 @@ def preprocess(path):
             nominal_capacity_in_Ah=C,
             max_voltage_limit_in_V=4.2,
             min_voltage_limit_in_V=2.7
-        ))
+        )
 
         # Remove the inflated directory
         # shutil.rmtree(rawdatadir)
-
-    return batteries

@@ -116,7 +116,6 @@ def preprocess(path):
 
     datadir = path / 'our_data'
     desc = 'Processing cells'
-    batteries = []
     for cell_file in tqdm(list(datadir.glob('*.pkl')), desc=desc, leave=False):
         cell_id = cell_file.stem
         cell_name = f'HUST_{cell_id}'
@@ -143,7 +142,7 @@ def preprocess(path):
         # Skip first problematic cycles
         if cell_name == 'HUST_7-5':
             cycles = cycles[2:]
-        batteries.append(BatteryData(
+        yield BatteryData(
             cell_id=cell_name,
             cycle_data=cycles,
             form_factor='cylindrical_18650',
@@ -184,6 +183,4 @@ def preprocess(path):
             ],
             min_voltage_limit_in_V=2.0,
             max_voltage_limit_in_V=3.6
-        ))
-
-    return batteries
+        )

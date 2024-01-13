@@ -20,7 +20,6 @@ def preprocess(path):
         x.stem.split('_timeseries')[0]
         for x in path.glob('*UL-PUR_N*timeseries*'))
 
-    batteries = []
     for cell in tqdm(cells, desc='Processing UL-PUR cells', leave=False):
         timeseries_file = next(path.glob(f'*{cell}*timeseries*'))
         cycle_data_file = next(path.glob(f'*{cell}*cycle_data*'))
@@ -30,9 +29,7 @@ def preprocess(path):
             continue
         timeseries_df, _ = clean_cell(
             timeseries_df, cycle_data_df, shifts=4)
-        batteries.append(organize_cell(
-            timeseries_df, cell, get_capacity(cell)))
-    return batteries
+        yield organize_cell(timeseries_df, cell, get_capacity(cell))
 
 
 def organize_cell(timeseries_df, name, C):
