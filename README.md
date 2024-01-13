@@ -28,8 +28,9 @@ In our experiments, we used the following public datasets:
 Simply run the following script to download the raw data files and preprocess them:
 
 ```bash
-python scripts/download.py --target-path ./data/raw
-python scripts/preprocess.py --input-path ./data/raw --target-path ./data/processed
+export PYTHONPATH=.:$PYTHONPATH
+python scripts/download.py --output-path ./data/raw
+python scripts/preprocess.py --input-path ./data/raw --output-path ./data/processed
 ```
 
 ## Experiment Reproduction

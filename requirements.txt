@@ -1,0 +1,6 @@
+fire
+h5py
+addict
+scikit-learn
+numba
+openpyxl
