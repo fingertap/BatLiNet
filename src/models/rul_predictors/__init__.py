@@ -7,7 +7,7 @@ from .plsr import PLSRRULPredictor
 from .elastic_net import ElasticNetRULPredictor
 from .random_forest import RandomForestRULPredictor
 from .linear_regression import LinearRegressionRULPredictor
-from .hybrid_diff_cnn import HybridDifferenceCNNRULPredictor
+from .batlinet import BatLiNetRULPredictor
 from .dummy import DummyRULPredictor
 from .ridge import RidgeRULPredictor
 from .gaussian_process import GaussianProcessRULPredictor

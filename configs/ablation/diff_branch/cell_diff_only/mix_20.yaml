@@ -25,7 +25,7 @@ train_test_split:
         - 'data/processed/HUST'
         - 'data/processed/HNEI'
 feature:
-    name: 'MultifacetedCapacityMatrixRULFeatureExtractor'
+    name: 'BatLiNetFeatureExtractor'
     max_cycle_index: 19
     cycle_to_drop: 10
     smooth_features: False

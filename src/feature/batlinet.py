@@ -10,7 +10,7 @@ from src.feature.base import BaseFeatureExtractor
 
 
 @FEATURE_EXTRACTORS.register()
-class MultifacetedCapacityMatrixRULFeatureExtractor(BaseFeatureExtractor):
+class BatLiNetFeatureExtractor(BaseFeatureExtractor):
     def __init__(self,
                  interp_dim: int = 1000,
                  diff_base: int = None,

@@ -1,5 +1,5 @@
 model:
-    name: 'HybridDifferenceCNNRULPredictor'
+    name: 'BatLiNetRULPredictor'
     in_channels: 6
     channels: 32
     input_height: 100
@@ -12,13 +12,12 @@ model:
     gradient_accumulation_steps: 1
     evaluate_freq: 100
     checkpoint_freq: None
-    diff_base: 9
-    cycles_to_drop: 38
+    alpha: 0.7
 train_test_split:
-    name: 'MATRCLOTestTrainTestSplitter'
-    cell_data_path: 'data/processed/MATR'
+    name: 'HUSTTrainTestSplitter'
+    cell_data_path: 'data/processed/HUST'
 feature:
-    name: 'MultifacetedCapacityMatrixRULFeatureExtractor'
+    name: 'BatLiNetFeatureExtractor'
     smooth_features: False
 label:
     name: 'RULLabelAnnotator'

@@ -16,7 +16,7 @@ train_test_split:
     name: 'HUSTTrainTestSplitter'
     cell_data_path: 'data/processed/HUST'
 feature:
-    name: 'MultifacetedCapacityMatrixRULFeatureExtractor'
+    name: 'BatLiNetFeatureExtractor'
     smooth_features: False
 label:
     name: 'RULLabelAnnotator'

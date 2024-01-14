@@ -17,7 +17,7 @@ train_test_split:
     name: 'MATRSecondaryTestTrainTestSplitter'
     cell_data_path: 'data/processed/MATR'
 feature:
-    name: 'MultifacetedCapacityMatrixRULFeatureExtractor'
+    name: 'BatLiNetFeatureExtractor'
     smooth_features: False
 label:
     name: 'RULLabelAnnotator'

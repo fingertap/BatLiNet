@@ -1,5 +1,5 @@
 model:
-    name: 'HybridDifferenceCNNRULPredictor'
+    name: 'BatLiNetRULPredictor'
     in_channels: 6
     channels: 32
     input_height: 100
@@ -17,7 +17,7 @@ train_test_split:
     name: 'HUSTTrainTestSplitter'
     cell_data_path: 'data/processed/HUST'
 feature:
-    name: 'MultifacetedCapacityMatrixRULFeatureExtractor'
+    name: 'BatLiNetFeatureExtractor'
     smooth_features: False
 label:
     name: 'RULLabelAnnotator'

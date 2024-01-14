@@ -1,5 +1,5 @@
 model:
-    name: 'HybridDifferenceCNNRULPredictor'
+    name: 'BatLiNetRULPredictor'
     in_channels: 6
     channels: 32
     input_height: 100
@@ -7,23 +7,27 @@ model:
     epochs: 1000
     train_batch_size: 128
     test_batch_size: 1
-    train_support_size: 1
+    train_support_size: 2
     test_support_size: 32
     gradient_accumulation_steps: 1
     evaluate_freq: 100
     checkpoint_freq: 2000
-    diff_base: 9
-    alpha: 0.2
 train_test_split:
-    name: 'MATRSecondaryTestTrainTestSplitter'
-    cell_data_path: 'data/processed/MATR'
+    name: 'RandomTrainTestSplitter'
+    cell_data_path:
+      - 'data/processed/CALCE'
+      - 'data/processed/RWTH'
+      - 'data/processed/UL_PUR'
+      - 'data/processed/HNEI'
+      - 'data/processed/MATR'
+      - 'data/processed/HUST'
 feature:
-    name: 'MultifacetedCapacityMatrixRULFeatureExtractor'
+    name: 'BatLiNetFeatureExtractor'
     smooth_features: False
 label:
     name: 'RULLabelAnnotator'
 label_transformation:
     name: 'SequentialDataTransformation'
     transformations:
-        - name: 'LogScaleDataTransformation'
-        - name: 'ZScoreDataTransformation'
+      - name: 'LogScaleDataTransformation'
+      - name: 'ZScoreDataTransformation'

@@ -8,7 +8,7 @@ from torch.utils.data.dataloader import DataLoader
 from src.builders import MODELS
 from src.data.databundle import DataBundle, Dataset
 from src.models.rul_predictors.cnn import ConvModule
-from src.feature.multifacet_capacity_matrix import hampel_smooth
+from src.feature.batlinet import hampel_smooth
 
 from ..nn_model import NNModel
 

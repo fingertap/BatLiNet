@@ -1,6 +1,6 @@
 model:
     features_to_drop: [0, 1, 4, 5]
-    name: 'HybridDifferenceCNNRULPredictor'
+    name: 'BatLiNetRULPredictor'
     in_channels: 2
     channels: 32
     input_height: 100
@@ -23,7 +23,7 @@ train_test_split:
       - 'data/processed/MATR'
       - 'data/processed/HUST'
 feature:
-    name: 'MultifacetedCapacityMatrixRULFeatureExtractor'
+    name: 'BatLiNetFeatureExtractor'
     smooth_features: False
 label:
     name: 'RULLabelAnnotator'

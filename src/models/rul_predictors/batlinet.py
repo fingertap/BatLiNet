@@ -37,7 +37,7 @@ def smoothing(feature):
 
 
 @MODELS.register()
-class HybridDifferenceCNNRULPredictor(NNModel):
+class BatLiNetRULPredictor(NNModel):
     def __init__(self,
                  in_channels: int,
                  channels: int,
