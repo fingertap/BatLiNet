@@ -2,7 +2,7 @@
 
 This repository provide the complete code for reproducing the results of paper "Accurate battery lifetime prediction across diverse aging conditions with deep learning".
 
-**_NOTE:_** To build features for `MIX-100`, you will need at least 128 GB memory. Also, to achieve high efficiency, you need have at least one GPU device for feature smoothing and learning algorithm.
+**_NOTE:_** To build features for `MIX-100`, you will need at least 128 GB memory. Also, to achieve efficiency, you need at least one GPU device for feature smoothing and learning algorithm.
 
 ## Environment Setup
 

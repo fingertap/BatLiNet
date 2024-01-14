@@ -190,7 +190,9 @@ def main(config_path: str,
                     'data': dataset.to('cpu'),
                     'seed': seed,
                 }
-                with open(model.workspace / f'predictions_{ts}.pkl', 'wb') as f:
+                with open(
+                    model.workspace / f'predictions_seed_{seed}_{ts}.pkl', 'wb'
+                ) as f:
                     pickle.dump(obj, f)
 
             # Print metrics
