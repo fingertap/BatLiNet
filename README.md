@@ -23,7 +23,14 @@ pip install -r requirements.txt
 
 In our experiments, we used the following public datasets:
 
-- MATR
+- MATR-1
+- MATR-2
+- SNL
+- UL_PUR
+- CLO
+- HNEI
+- RWTH
+- CALCE
 
 Simply run the following script to download the raw data files and preprocess them:
 
