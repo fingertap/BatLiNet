@@ -126,10 +126,15 @@ def main(config_path: str,
          metric: str = 'RMSE,MAE,MAPE',
          skip_training_if_exists: bool = False,
          skip_evaluation_if_exists: bool = False,
+         build_cache_only: bool = False,
          seed: int = 0,
          epochs: int = None):
     set_seed(seed)
     configs = load_config(config_path, workspace)
+
+    if build_cache_only:
+        dataset = build_dataset(configs, device)
+        return
 
     if isinstance(metric, str):
         metric = metric.split(',')
