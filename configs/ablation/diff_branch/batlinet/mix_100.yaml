@@ -13,7 +13,7 @@ model:
     evaluate_freq: 100
     checkpoint_freq: 2000
 train_test_split:
-    name: 'RandomTrainTestSplitter'
+    name: 'MIX100TrainTestSplitter'
     cell_data_path:
       - 'data/processed/CALCE'
       - 'data/processed/RWTH'

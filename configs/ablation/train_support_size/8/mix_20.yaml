@@ -15,7 +15,7 @@ model:
     checkpoint_freq: None
     filter_cycles: False
 train_test_split:
-    name: 'RandomTrainTestSplitter'
+    name: 'MIX20TrainTestSplitter'
     cell_data_path:
         - 'data/processed/CALCE'
         - 'data/processed/RWTH'

@@ -4,4 +4,5 @@ from .MATR_split import (
     MATRSecondaryTestTrainTestSplitter
 )
 from .HUST_split import HUSTTrainTestSplitter
-from .random_split import RandomTrainTestSplitter
+from .MIX20_split import MIX20TrainTestSplitter
+from .MIX100_split import MIX100TrainTestSplitter

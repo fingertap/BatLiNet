@@ -43,7 +43,7 @@ for (( seed=0; seed<TOTAL_SEEDS; seed++ )); do
         wait ${device_pids[$device_id]}
     fi
 
-    [[ -e $WORKSPACE/log.$seed ]] || python $SCRIPT $1 --train --device $actual_device --workspace $WORKSPACE --seed $seed | tee $WORKSPACE/log.$seed &
+    [[ -e $WORKSPACE/log.$seed ]] || python $SCRIPT $1 --train True --device $actual_device --workspace $WORKSPACE --seed $seed | tee $WORKSPACE/log.$seed &
     device_pids[$device_id]=$!
 done
 

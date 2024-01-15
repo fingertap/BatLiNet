@@ -15,7 +15,7 @@ model:
     filter_cycles: False
     diff_base: 0
 train_test_split:
-    name: 'RandomTrainTestSplitter'
+    name: 'MIX20TrainTestSplitter'
     cell_data_path:
         - 'data/processed/CALCE'
         - 'data/processed/RWTH'
