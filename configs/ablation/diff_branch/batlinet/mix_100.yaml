@@ -23,7 +23,7 @@ train_test_split:
       - 'data/processed/HUST'
 feature:
     name: 'BatLiNetFeatureExtractor'
-    smooth_features: True
+    smooth_features: False
 label:
     name: 'RULLabelAnnotator'
 label_transformation:

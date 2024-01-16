@@ -12,7 +12,6 @@ model:
     gradient_accumulation_steps: 1
     evaluate_freq: 100
     checkpoint_freq: None
-    alpha: 0.7
 train_test_split:
     name: 'HUSTTrainTestSplitter'
     cell_data_path: 'data/processed/HUST'

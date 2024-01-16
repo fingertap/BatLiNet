@@ -45,7 +45,7 @@ class BatLiNetRULPredictor(NNModel):
                  input_width: int,
                  alpha: float = 0.5,
                  kernel_size: int = 3,
-                 diff_base: int = 9,
+                 diff_base: int = 10,
                  train_support_size: int = None,
                  test_support_size: int = None,
                  gradient_accumulation_steps: int = 1,
@@ -197,7 +197,6 @@ class BatLiNetRULPredictor(NNModel):
             feature[:, :, self.cycles_to_drop] = 0.
             raw_feature[:, :, self.cycles_to_drop] = 0.
         feature = self._clean_feature(feature)
-        # feature[..., -100:] = smoothing(feature[..., -100:])
         raw_feature = self._filter_cycles(raw_feature)
         return DiffDataset(feature, raw_feature, dataset.label)
 
