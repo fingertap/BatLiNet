@@ -8,6 +8,7 @@
 /data/
 
 # Intermediate files
+/temp
 /temp_code/
 /temp_config/
 /workspaces
