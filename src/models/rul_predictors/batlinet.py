@@ -55,7 +55,6 @@ class BatLiNetRULPredictor(NNModel):
                  filter_cycles: bool = True,
                  features_to_drop: list = None,
                  cycles_to_drop: list = None,
-                 stride: int = 1,
                  **kwargs):
         NNModel.__init__(self, **kwargs)
         if isinstance(kernel_size, int):
@@ -87,7 +86,6 @@ class BatLiNetRULPredictor(NNModel):
             in_channels, channels,
             input_height, input_width,
             kernel_size, act_fn)
-        self.stride = stride
         # Shared regressor without bias
         self.fc = nn.Linear(channels, 1, bias=False)
         self.lr = lr
@@ -98,9 +96,6 @@ class BatLiNetRULPredictor(NNModel):
                support_feature: torch.Tensor,
                support_label: torch.Tensor,
                return_loss: bool = False):
-        feature = feature[:, :, ::self.stride]
-        support_feature = support_feature[:, :, :, ::self.stride]
-
         B, S, C, H, W = support_feature.size()
 
         x_ori = self.ori_module(feature)
@@ -226,13 +221,12 @@ class BatLiNetRULPredictor(NNModel):
         return feature, label
 
     def _clean_feature(self, feature):
-        feature[..., :50] = smoothing(feature[..., :50])
-        feature[..., -50:] = smoothing(feature[..., -50:])
+        num = 50
+        feature[..., :num] = smoothing(feature[..., :num])
+        feature[..., -num:] = smoothing(feature[..., -num:])
         feature = remove_glitches(feature)
         # Filter problematic cycles using Hampel filter
         feature = self._filter_cycles(feature)
-        # Remove too large feature values
-        # feature[feature.abs() > 2] = 0.
         return feature
 
     def _filter_cycles(self, feature):
