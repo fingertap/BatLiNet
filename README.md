@@ -58,9 +58,15 @@ To run a single config file, substitude the file path to the config file you wou
 PYTHONPATH=. python scripts/pipeline.py YOUR_CONFIG_FILE --train True --evaluate True
 ```
 
-To run all experirments sequentially, use the following command:
+To run a config with $n$ seeds starting from 0, run the following command:
 
 ```bash
+```
+
+To run all experirments sequentially (for a complete reproduction of our experiments), use the following command:
+
+```bash
+./scripts/run_all_configs.sh
 ```
 
 ## Figures and Tables
