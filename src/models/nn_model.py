@@ -28,6 +28,7 @@ class NNModel(BaseModel, nn.Module, abc.ABC):
                  checkpoint_freq: int = 1000,
                  train_batch_size: int = None,
                  test_batch_size: int = None,
+                 seed: int = None,
                  lr: float = 1e-3):
         nn.Module.__init__(self)
         BaseModel.__init__(self, workspace)
@@ -40,6 +41,7 @@ class NNModel(BaseModel, nn.Module, abc.ABC):
         self.train_batch_size = train_batch_size or batch_size
         self.test_batch_size = test_batch_size or batch_size
         self.lr = lr
+        self.seed = seed
 
     def fit(self,
             dataset: DataBundle,
@@ -69,7 +71,7 @@ class NNModel(BaseModel, nn.Module, abc.ABC):
 
             if self.checkpoint_freq is not None and \
                     (epoch + 1) % self.checkpoint_freq == 0:
-                filename = f'{timestamp}_epoch_{epoch+1}.ckpt'
+                filename = f'{timestamp}_seed_{self.seed}_epoch_{epoch+1}.ckpt'
                 if self.workspace is not None:
                     self.dump_checkpoint(self.workspace / filename)
                     latest = self.workspace / filename

@@ -55,6 +55,8 @@ class BatLiNetRULPredictor(NNModel):
                  filter_cycles: bool = True,
                  features_to_drop: list = None,
                  cycles_to_drop: list = None,
+                 return_pointwise_predictions: bool = False,
+                 seed: int = 0,
                  **kwargs):
         NNModel.__init__(self, **kwargs)
         if isinstance(kernel_size, int):
@@ -77,6 +79,7 @@ class BatLiNetRULPredictor(NNModel):
         if isinstance(cycles_to_drop, int):
             cycles_to_drop = [cycles_to_drop]
         self.cycles_to_drop = cycles_to_drop
+        self.return_pointwise_predictions = return_pointwise_predictions
 
         self.ori_module = build_module(
             in_channels, channels,
@@ -89,6 +92,7 @@ class BatLiNetRULPredictor(NNModel):
         # Shared regressor without bias
         self.fc = nn.Linear(channels, 1, bias=False)
         self.lr = lr
+        self.seed = seed
 
     def forward(self,
                feature: torch.Tensor,
@@ -104,6 +108,9 @@ class BatLiNetRULPredictor(NNModel):
         y_ori = self.fc(x_ori.view(B, self.channels)).view(-1)
         y_sup = self.fc(x_sup.view(B, S, self.channels)).view(B, S)
         y_sup += support_label.view(B, S)
+
+        if self.return_pointwise_predictions:
+            return y_ori, y_sup
 
         if self.training:
             y_sup = y_sup.mean(1).view(-1)
@@ -152,7 +159,7 @@ class BatLiNetRULPredictor(NNModel):
                 and self.checkpoint_freq is not None
                 and (epoch + 1) % self.checkpoint_freq == 0
             ):
-                filename = self.workspace / f'{timestamp}_epoch_{epoch+1}.ckpt'
+                filename = self.workspace / f'{timestamp}_seed_{self.seed}_epoch_{epoch+1}.ckpt'
                 self.dump_checkpoint(filename)
                 latest = filename
 
@@ -181,7 +188,13 @@ class BatLiNetRULPredictor(NNModel):
             sup_x, sup_y = self.get_support_set(
                 raw_x, dataset.train_data.feature, dataset.train_data.label)
             predictions.append(self.forward(x, y, sup_x, sup_y))
-        predictions = torch.cat(predictions)
+        if self.return_pointwise_predictions:
+            predictions = (
+                torch.cat([x[0] for x in predictions]),
+                torch.cat([x[1] for x in predictions]),
+            )
+        else:
+            predictions = torch.cat(predictions)
         return predictions
 
     @torch.no_grad()

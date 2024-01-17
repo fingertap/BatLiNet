@@ -21,6 +21,13 @@ Install PyTorch following the [official instructions](#) and then install the re
 pip install -r requirements.txt
 ```
 
+Install Microsoft font for figures:
+
+```bash
+$ apt install ttf-mscorefonts-installer && fc-cache -f
+Arial.ttf: "Arial" "Regular"
+```
+
 ## Dataset preparation
 
 In our experiments, we used the following public datasets:

@@ -144,6 +144,8 @@ def main(config_path: str,
     if epochs is not None:
         configs['model']['epochs'] = epochs
 
+    configs['model']['seed'] = seed
+
     model = MODELS.build(configs['model'])
     if model.workspace is None:
         model.workspace = configs['workspace']
