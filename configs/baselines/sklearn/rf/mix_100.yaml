@@ -1,5 +1,5 @@
 model:
-    name: 'MIX100ForestRULPredictor'
+    name: 'RandomForestRULPredictor'
 train_test_split:
     name: 'MIX100TrainTestSplitter'
     cell_data_path:
