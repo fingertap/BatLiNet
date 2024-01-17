@@ -61,6 +61,7 @@ PYTHONPATH=. python scripts/pipeline.py YOUR_CONFIG_FILE --train True --evaluate
 To run a config with $n$ seeds starting from 0, run the following command:
 
 ```bash
+./scripts/run_pipeline_with_n_seeds.sh YOUR_CONFIG_FILE NUMBER_OF_SEEDS
 ```
 
 To run all experirments sequentially (for a complete reproduction of our experiments), use the following command:
