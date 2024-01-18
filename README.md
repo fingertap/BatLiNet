@@ -86,4 +86,11 @@ We provide the code for plotting the figures and tables in [fig&tab.ipynb](fig&t
 If you find our code or algorithm useful in your research, please cite:
 
 ```bibtext
+@article{zhang2023accurate,
+  title={Accurate battery lifetime prediction across diverse aging conditions with deep learning},
+  author={Zhang, Han and Li, Yuqi and Zheng, Shun and Lu, Ziheng and Gui, Xiaofan and Xu, Wei and Bian, Jiang},
+  journal={arXiv e-prints},
+  pages={arXiv--2310},
+  year={2023}
+}
 ```
