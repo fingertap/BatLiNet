@@ -8,6 +8,10 @@ from .base import BaseModel
 
 
 class SkleanModel(BaseModel, abc.ABC):
+    def __init__(self, workspace: str = None, seed: int = 0):
+        BaseModel.__init__(self, workspace)
+        self.seed = seed
+
     def fit(self, dataset: DataBundle, timestamp: str = None) -> None:
         device = dataset.device
         dataset = dataset.to('cpu')
