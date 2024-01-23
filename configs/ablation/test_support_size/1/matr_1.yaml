@@ -11,7 +11,7 @@ model:
     test_support_size: 1
     gradient_accumulation_steps: 1
     evaluate_freq: 100
-    checkpoint_freq: None
+    checkpoint_freq: 2000
     diff_base: 9
 train_test_split:
     name: 'MATRPrimaryTestTrainTestSplitter'

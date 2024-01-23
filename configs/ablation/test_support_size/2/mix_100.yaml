@@ -11,7 +11,7 @@ model:
     test_support_size: 2
     gradient_accumulation_steps: 1
     evaluate_freq: 100
-    checkpoint_freq: None
+    checkpoint_freq: 2000
 train_test_split:
     name: 'MIX100TrainTestSplitter'
     cell_data_path:
