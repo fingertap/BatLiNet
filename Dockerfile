@@ -1,15 +1,16 @@
-FROM pytorch/pytorch:2.1.2-cuda11.8-cudnn8-runtime
-
-WORKDIR /root
-
-COPY . /root
-
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends ttf-mscorefonts-installer && \
-    fc-cache -f && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
-
+# Use an official Python runtime as a parent image
+FROM pytorch/pytorch:2.0.1-cuda11.7-cudnn8-runtime
+# Set the working directory in the container to /app
+WORKDIR /batlinet_reproduce
+# Add the current directory contents into the container at /app
+ADD . /batlinet_reproduce
+# Upgrade pip  
+RUN pip install --upgrade pip 
+# Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
-
 RUN pip install jupyter ipykernel
+
+# Make port 80 and 22available to the world outside this container
+EXPOSE 80 22
+# # Run app.py when the container launches
+# CMD ["python", "app.py"]
