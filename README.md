@@ -5,9 +5,18 @@ This repository provide the complete code for reproducing the results of paper "
 **_NOTE:_** To build features for `MIX-100`, you will need at least 128 GB memory. Also, to achieve efficiency, you need at least one GPU device for feature smoothing and learning algorithm.
 
 ## Environment Setup
+### Docker
 
-We recommend using the image [fingertap/nmi_reproduction](#) that contains all the necessary libraries for reproduction. Please refer to the [dockerfile](Dockerfile) for details.
+<!-- We recommend using the image [fingertap/nmi_reproduction](#) that contains all the necessary libraries for reproduction. Please refer to the [dockerfile](Dockerfile) for details. -->
+We recommend using our Docker image to reproduce our work. It includes all preprocessed data, code, and environment variables. You can pull the Docker image to your local environment using the following command:
 
+```bash
+docker pull batteryml/batlinet:latest
+```
+
+After pulling the Docker image and running the Docker container, you can execute the scripts mentioned in the [Experiment Reproduction](#experiment-reproduction) section to reproduce our experiments.
+
+### Conda
 To start from a fresh installation of Ubuntu with GPU, first install [conda](#) and create a conda environment:
 
 ```bash
@@ -71,7 +80,14 @@ To run a config with $n$ seeds starting from 0, run the following command:
 ./scripts/run_pipeline_with_n_seeds.sh YOUR_CONFIG_FILE NUMBER_OF_SEEDS
 ```
 
-To run all experirments sequentially (for a complete reproduction of our experiments), use the following command:
+To execute all BatLiNet experiments across all datasets using 8 seeds, please utilize the command provided below:
+
+```bash
+./scripts/run_batlinet.sh
+```
+
+
+To run all experiments sequentially (for a comprehensive reproduction of our experiments including comparisons with other models), use the following command:
 
 ```bash
 ./scripts/run_all_configs.sh
@@ -79,7 +95,10 @@ To run all experirments sequentially (for a complete reproduction of our experim
 
 ## Figures and Tables
 
-We provide the code for plotting the figures and tables in [fig&tab.ipynb](fig&tab.ipynb).
+<!-- We provide the code for plotting the figures and tables in [fig&tab.ipynb](fig&tab.ipynb). -->
+For a more comprehensive understanding of our work, we have provided Jupyter notebooks that are instrumental in creating nearly all of the tables and figures presented in our research paper. 
+
+These notebooks are conveniently located in the [notebooks](notebooks) directory of our repository. We encourage you to explore these resources to gain deeper insights into our methodologies and results.
 
 ## Citation
 
