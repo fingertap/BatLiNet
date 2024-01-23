@@ -152,6 +152,11 @@ def main(config_path: str,
 
     if checkpoint is not None:
         model.load_checkpoint(checkpoint)
+    elif not train:
+        # load model from checkpoint
+        checkpoint = next(Path(workspace).glob(f'*seed_{seed}*'))
+        if checkpoint:
+            model.load_checkpoint(checkpoint)
 
     if torch.__version__ >= '2' and isinstance(model, torch.nn.Module):
         model = torch.compile(model)
