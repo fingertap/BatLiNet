@@ -151,12 +151,13 @@ def main(config_path: str,
         model.workspace = configs['workspace']
 
     if checkpoint is not None:
-        model.load_checkpoint(checkpoint)
+        model.load_checkpoint(checkpoint,device=device)
     elif not train:
         # load model from checkpoint
-        checkpoint = next(Path(workspace).glob(f'*seed_{seed}*'))
+        checkpoint = next(Path(workspace).glob(f'*seed_{seed}*.ckpt'))
+        print('checkpoint:',checkpoint)
         if checkpoint:
-            model.load_checkpoint(checkpoint)
+            model.load_checkpoint(checkpoint,device=device)
 
     if torch.__version__ >= '2' and isinstance(model, torch.nn.Module):
         model = torch.compile(model)
