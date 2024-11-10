@@ -100,8 +100,10 @@ class NNModel(BaseModel, nn.Module, abc.ABC):
     def dump_checkpoint(self, path: str):
         torch.save(self.state_dict(), path)
 
-    def load_checkpoint(self, path: str):
-        self.load_state_dict(torch.load(path))
+    # def load_checkpoint(self, path: str, device: str="cuda"):
+    #     self.load_state_dict(torch.load(path, map_location=torch.device(device)))
+    def load_checkpoint(self, ckpt):
+        self.load_state_dict(ckpt)
 
 
 def reset_parameters(model):
